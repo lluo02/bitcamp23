@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 import gptclient as gpt
+from predict_spam import predict_spam
 
 
 texts = []

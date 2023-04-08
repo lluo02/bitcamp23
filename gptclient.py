@@ -7,7 +7,7 @@ openai.api_key = os.getenv('GPT_API_KEY')
 openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
-        {"role": "system", "content": "You are a very kind helpdesk agent."}
+        {"role": "system", "content": "You are a very kind help desk agent."}
         ])
 
 def generate_response(message):
