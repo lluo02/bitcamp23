@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route("/texts", methods=['GET'])
 def send_data():
     if request.method == 'GET':
-        if texts[-1]:
+        if len(texts) > 0:
             return str(texts[-1])
         else:
             return ''
@@ -30,11 +30,15 @@ def incoming_sms():
     sender_number = request.values.get('From', None)
     # Start our TwiML response
     resp = MessagingResponse()
-
+ 
+    #Predict if it is spam with accuracy > 0.8
+    if predict_spam([body])[0][0] > 0.8:
+        resp.message('STOP UNSUBSCRIBE OPT OUT')
+        return str(resp)
 
     # Determine the right reply for this message
     if request.method == 'POST':
-        gpt_response = gpt.generate_response("Write a response to this text message:" + body)
+        gpt_response = gpt.generate_response('Write a response to this text message:' + body)
 
         resp.message(gpt_response)
 
