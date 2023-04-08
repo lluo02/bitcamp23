@@ -22,7 +22,7 @@ def generate_response(message):
       temperature=0.7,
     )
     message = response.choices[0].text.strip()
-    print(predict_spam.predict_spam(message))
+    print(predict_spam.predict_spam([message]))
     #print(message)
     return message
 
