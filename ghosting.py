@@ -1,5 +1,7 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
+import gptclient as gpt
+
 
 app = Flask(__name__)
 
@@ -11,16 +13,13 @@ def incoming_sms():
     body = request.values.get('Body', None)
     # Start our TwiML response
     resp = MessagingResponse()
-    
+
 
     # Determine the right reply for this message
     if request.method == 'POST':
-        if body == 'hello':
-            resp.message("Hi!")
-        elif body == 'bye':
-            resp.message("Goodbye")
-        else:
-            resp.message("Testing")
+        gpt_response = gpt.generate_response("Write a response to this text message:" + body)
+
+        resp.message(gpt_response)
 
     return str(resp)
 
