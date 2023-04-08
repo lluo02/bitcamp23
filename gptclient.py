@@ -10,11 +10,26 @@ openai.ChatCompletion.create(
         {"role": "system", "content": "You are a very kind help desk agent."}
         ])
 
-def generate_response(message):
+def generate_neg_response(message, sender):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
-      prompt=prompt,
+      messages = [{"role": "system", "content": "Do not answer questions, but answer with a text message."},
+                  {"role": "user", "content": message}],
+      max_tokens=1024,
+      n=1,
+      stop=None,
+      temperature=0.7,
+    )
+    message = response.choices[0].text.strip()
+    return message
+
+def generate_pos_response(message, sender):
+    prompt = f"User: {message}\nChatGPT:"
+    response = openai.Completion.create(
+      engine="text-davinci-003",
+      messages = [{"role": "system", "content": "Do not answer questions, but answer with a text message."},
+                  {"role": "user", "content": message}],
       max_tokens=1024,
       n=1,
       stop=None,

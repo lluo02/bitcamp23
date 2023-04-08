@@ -5,6 +5,8 @@ from predict_spam import predict_spam
 
 
 texts = []
+like = []
+
 
 app = Flask(__name__)
 
@@ -38,7 +40,8 @@ def incoming_sms():
 
     # Determine the right reply for this message
     if request.method == 'POST':
-        gpt_response = gpt.generate_response('Write a response to this text message:' + body)
+        if sender_number in like:
+            gpt_response = gpt.generate_response('Write a response to this text message:' + body, sender_number)
 
         resp.message(gpt_response)
 
