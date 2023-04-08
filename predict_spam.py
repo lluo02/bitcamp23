@@ -33,4 +33,7 @@ def tokenize(input):
 
 def predict_spam(input):
     model = keras.models.load_model("spam_model")
-    return model.predict(input)
+    txts = tok.texts_to_sequences(input)
+    txts = sequence.pad_sequences(txts, maxlen=150)
+    preds = model.predict(txts)
+    return preds
