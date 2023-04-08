@@ -4,16 +4,12 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv('API_KEY')
 
-openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
-        {"role": "system", "content": "You are a very kind helpdesk agent."}
-        ])
+
 
 def generate_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
-      engine="text-davinci-003",
+      engine="text-davinci-002",
       prompt=prompt,
       max_tokens=1024,
       n=1,
