@@ -8,6 +8,10 @@ texts = []
 like = []
 
 
+parent_numbers = []
+
+friend_numbers = []
+
 app = Flask(__name__)
 
 @app.route("/texts", methods=['GET'])
@@ -32,6 +36,14 @@ def incoming_sms():
     sender_number = request.values.get('From', None)
     # Start our TwiML response
     resp = MessagingResponse()
+
+    #Check if number is a friend of parent
+    if sender_number in parent_numbers:
+        pass
+
+    if sender_number in friend_numbers:
+        pass
+
  
     #Predict if it is spam with accuracy > 0.8
     if predict_spam([body])[0][0] > 0.8:
