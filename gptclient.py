@@ -1,5 +1,6 @@
 import openai,os,sys
 from dotenv import load_dotenv
+import predict_spam
 
 load_dotenv()
 openai.api_key = os.getenv('API_KEY')
@@ -21,4 +22,7 @@ def generate_response(message):
       temperature=0.7,
     )
     message = response.choices[0].text.strip()
+    print(predict_spam.predict_spam(message))
+    #print(message)
     return message
+

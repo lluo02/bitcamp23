@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
+from predict_spam import predict_spam
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def incoming_sms():
     # Start our TwiML response
     resp = MessagingResponse()
     
-
+    print(predict_spam(body))
     # Determine the right reply for this message
     if request.method == 'POST':
         if body == 'hello':
