@@ -4,9 +4,10 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import LSTM, Activation, Dense, Dropout, Input, Embedding
-from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.utils import to_categorical
+import json
 
 tok = Tokenizer(num_words=10000)
 
@@ -33,6 +34,9 @@ def tokenize(input):
 
 def predict_spam(input):
     model = keras.models.load_model("spam_model")
+    with open('tokenizer.json') as f:
+        data = json.load(f)
+        tok = tokenizer_from_json(data)
     txts = tok.texts_to_sequences(input)
     txts = sequence.pad_sequences(txts, maxlen=150)
     preds = model.predict(txts)
