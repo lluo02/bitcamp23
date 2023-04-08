@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
-from predict_spam import predict_spam
+from predict_spam import predict_spam, tokenize
 from gptclient import generate_response
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ def incoming_sms():
     # Start our TwiML response
     resp = MessagingResponse()
     
-    print(predict_spam(body))
+    print(predict_spam(tokenize(body)))
     # Determine the right reply for this message
     if request.method == 'POST':
         if body == 'hello':
@@ -28,7 +28,7 @@ def incoming_sms():
 
 @app.route("/contacts", methods=['GET', 'POST'])
 def update_contacts():
-    contacts = ['Mom', 'Roommate', 'Boss', 'Group Project', 'Ex', 'Annoying Person']
+    contacts = ['Mom', 'Roommate', 'Boss', 'Group Project', 'Ex', 'Kevin']
     return ""
 
 if __name__ == "__main__":
