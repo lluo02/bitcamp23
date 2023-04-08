@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 from predict_spam import predict_spam
+from gptclient import generate_response
 
 app = Flask(__name__)
 
@@ -17,13 +18,18 @@ def incoming_sms():
     # Determine the right reply for this message
     if request.method == 'POST':
         if body == 'hello':
-            resp.message("Hi!")
+            resp.message(generate_response(body))
         elif body == 'bye':
             resp.message("Goodbye")
         else:
             resp.message("Testing")
 
     return str(resp)
+
+@app.route("/contacts", methods=['GET', 'POST'])
+def update_contacts():
+    contacts = ['Mom', 'Roommate', 'Boss', 'Group Project', 'Ex', 'Annoying Person']
+    return ""
 
 if __name__ == "__main__":
     app.run(debug=True)
