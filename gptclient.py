@@ -15,8 +15,7 @@ def generate_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
-      messages = [{"role": "system", "content": "You are a human being"},
-                  {"role": "user", "content": message}],
+      prompt = prompt,
       max_tokens=1024,
       n=1,
       stop=None,
@@ -32,8 +31,7 @@ def generate_friend_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
-      messages = [{"role": "system", "content": "You are a college student being texted by a friend. Answer with a text message. Do not answer homework questions."},
-                  {"role": "user", "content": message}],
+      prompt = prompt,
       max_tokens=1024,
       n=1,
       stop=None,
@@ -46,8 +44,7 @@ def generate_parent_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
-      messages = [{"role": "system", "content": "Answer with a text message, but do not say anything that might make the recipient worry, because they are family."},
-                  {"role": "user", "content": message}],
+      prompt = prompt,
       max_tokens=1024,
       n=1,
       stop=None,
