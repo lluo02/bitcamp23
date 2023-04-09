@@ -10,11 +10,11 @@ openai.ChatCompletion.create(
         {"role": "system", "content": "You are a very kind help desk agent."}
         ])
 
-def generate_neg_response(message, sender):
+def generate_friend_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
-      messages = [{"role": "system", "content": "Do not answer questions, but answer with a text message."},
+      messages = [{"role": "system", "content": "You are a college student being texted by a friend. Answer with a text message. Do not answer homework questions."},
                   {"role": "user", "content": message}],
       max_tokens=1024,
       n=1,
@@ -24,11 +24,11 @@ def generate_neg_response(message, sender):
     message = response.choices[0].text.strip()
     return message
 
-def generate_pos_response(message, sender):
+def generate_parent_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
-      messages = [{"role": "system", "content": "Do not answer questions, but answer with a text message."},
+      messages = [{"role": "system", "content": "Answer with a text message, but do not say anything that might make the recipient worry, because they are family."},
                   {"role": "user", "content": message}],
       max_tokens=1024,
       n=1,

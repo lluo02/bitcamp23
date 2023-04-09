@@ -5,8 +5,6 @@ from predict_spam import predict_spam
 
 
 texts = []
-like = []
-
 
 parent_numbers = []
 
@@ -36,14 +34,6 @@ def incoming_sms():
     sender_number = request.values.get('From', None)
     # Start our TwiML response
     resp = MessagingResponse()
-
-    #Check if number is a friend of parent
-    if sender_number in parent_numbers:
-        pass
-
-    if sender_number in friend_numbers:
-        pass
-
  
     #Predict if it is spam with accuracy > 0.8
     if predict_spam([body])[0][0] > 0.8:
@@ -52,8 +42,13 @@ def incoming_sms():
 
     # Determine the right reply for this message
     if request.method == 'POST':
-        if sender_number in like:
-            gpt_response = gpt.generate_response('Write a response to this text message:' + body, sender_number)
+        #Check if number is a friend of parent
+        if sender_number in parent_numbers:
+            gpt_response = gpt.generate_parent_response('Write a response to this text message:' + body)
+
+        if sender_number in friend_numbers:
+            gpt_response = gpt.generate_friend_response('Write a response to this text message:' + body)
+            
 
         resp.message(gpt_response)
 
