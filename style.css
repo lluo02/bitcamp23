@@ -1,0 +1,118 @@
+.chat {
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 80vh;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-header {
+    background-color:  #4a8dd5;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .chat-header h3 {
+    margin: 0;
+  }
+  
+  .chat-history {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
+  
+  .chat-history ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .chat-history li {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-history .message-sent {
+    align-self: flex-end;
+    background-color: #1982FC;
+    color: #fff;
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    margin-left:150px;
+  }
+  
+  .chat-history .reply {
+    align-self: flex-start;
+    background-color: #e2e0e0;
+    color: #000000;
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .chat-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .chat-input input {
+    border: none;
+    background-color: #F0F0F0;
+    padding: 10px;
+    border-radius: 20px;
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .chat-input button {
+    border: none;
+    background-color: #6297d0;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+
+li.clearfix .message.other {
+  background-color: #f0f0f0;
+  color: #000;
+  border-radius: 15px 15px 0 15px;
+  margin-right: 70px;
+}
+
+li.clearfix .message.other:before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: -10px;
+  border-style: solid;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent #f0f0f0;
+  z-index: 1;
+}
+
+li.clearfix .message.other:after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: -9px;
+  border-style: solid;
+  border-width: 10px 0 10px 9px;
+  border-color: transparent transparent transparent #fff;
+  z-index: 2;
+}
