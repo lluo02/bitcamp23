@@ -43,7 +43,7 @@ function displayMessages() {
     .then(response => response.text())
     .then(data => {
         console.log(data)
-      data = "(\'Hi\', \'Hi there! How can I help you?\')";
+    
       const result = data.match(pattern);
       const send_msg = result[1];
       const reply_msg = result[2];

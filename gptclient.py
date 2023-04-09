@@ -44,6 +44,7 @@ def generate_parent_response(message):
     prompt = f"User: {message}\nChatGPT:"
     response = openai.Completion.create(
       engine="text-davinci-003",
+      # Maybe ChatCompletion is different from Completion and that has a message parameter
       prompt = prompt,
       max_tokens=1024,
       n=1,
